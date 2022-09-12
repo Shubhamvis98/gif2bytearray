@@ -11,7 +11,7 @@ cat << 'EOF'
  / _  | (_   __)  (____ |  _ \| |    \(____ (_   _) _ \ / ___)
 ( (_| | | | |     / ___ | | | | | | | / ___ | | || |_| | |
  \___ |_| |_|     \_____|_| |_|_|_|_|_\_____|  \__)___/|_|
-(_____|                             gif to bytesarray
+(_____|                                   gif to bytearray
 
 git|twitter: shubhamvis98
 web: https://fossfrog.in
@@ -23,10 +23,10 @@ help()
 {
 cat << 'EOF'
 USAGE:
-        ./g2bconv gif_file output_directory width height
+        ./g2bconv gif_file output_directory width height frameskip
 
-        # width and height values are optional
-        # default values for width=128 and height=64
+        # width, height and frameskip values are optional
+        # default values for width=128, height=64 with no frameskip
 
 EXAMPLE:
         ./g2bconv cat.gif cat 64 64
