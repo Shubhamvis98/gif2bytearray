@@ -21,4 +21,13 @@ EXAMPLE:
         ./g2bconv cat.gif cat
 --------------------------------------------------------------
 </pre>
+
+This tool creates a file names as per {output_directory}.py wich contains the list of bytearray.<br>So you can use the file by importing in micropython. eg. the output is "cat.py"
+<br><pre>
+from cat.py import img
+<code># micropython or circuitpython</code>
+<code># img will be a list so use it as the image sequence</code>
+</pre>
+
+
 ![b](https://user-images.githubusercontent.com/43336210/189738647-ef7e2b04-4076-46e7-83b0-8f0452081069.gif)
