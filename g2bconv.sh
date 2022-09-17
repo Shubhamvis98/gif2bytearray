@@ -15,7 +15,7 @@ cat << 'EOF'
 
 git|twitter: shubhamvis98
 web: https://fossfrog.in
---------------------------------------------------------------
+-------------------------------------------------------------------------------
 EOF
 }
 
@@ -23,33 +23,56 @@ help()
 {
 cat << 'EOF'
 USAGE:
-        ./g2bconv gif_file output_directory width height frameskip
-
+        ./g2bconv -i gif_file -o output_directory -s widthxheight -f frameskip
+-------------------------------------------------------------------------------
         # width, height and frameskip values are optional
         # default values for width=128, height=64 with no frameskip
 
 EXAMPLE:
-        ./g2bconv cat.gif cat 64 64
-        ./g2bconv cat.gif cat
---------------------------------------------------------------
+        ./g2conv -h # for help
+        ./g2bconv -i cat.gif -o cat -s 64x32 -f 4
+        ./g2bconv -i cat.gif -o cat -s 64x32
+        ./g2bconv -i cat.gif -o cat
+-------------------------------------------------------------------------------
 
 EOF
 }
 
-[[ -z $2 ]] && banner && help && exit || banner
-[ ! -d $2 ] && mkdir -p $2
-if [[ -z $4 ]]
+while getopts "hi:o:s:f:" opt
+do
+	case $opt in
+		h)
+			banner
+			help
+			exit
+			;;
+		i)
+			GIF=${OPTARG}
+			;;
+		o)
+			OUT=${OPTARG}
+			;;
+		s)
+			SIZE=${OPTARG}
+			;;
+		f)
+			FSKP=${OPTARG}
+			;;
+	esac
+done
+
+[[ -z $OUT ]] && banner && help && exit || banner
+[ ! -d $OUT ] && mkdir -p $2
+if [[ -z $SIZE ]]
 then
 	WIDTH=128
 	HEIGHT=64
 else
-	WIDTH=$3
-	HEIGHT=$4
+	WIDTH=`echo $SIZE | cut -d'x' -f1`
+	HEIGHT=`echo $SIZE | cut -d'x' -f2`
 fi
-[[ -z $5 ]] && FSKIP=1 || FSKIP=$5
+[[ -z $FSKP ]] && FSKP=1
 
-GIF=$1
-OUT=$2
 OUTPY=${OUT}.py
 
 echo '[+]Converting to JPG...'
@@ -72,11 +95,10 @@ do
 	C=`expr $C + 1`
 done
 
-[ $FSKIP -gt 1 ] && echo "[+]Frameskip -> ${FSKIP}..." || echo '[*]No Frameskip'
-python frameskip.py ${OUTPY} ${OUTPY} $FSKIP
+[ $FSKP -gt 1 ] && echo "[+]Frameskip -> ${FSKP}..." || echo '[*]No Frameskip'
+python frameskip.py ${OUTPY} ${OUTPY} $FSKP
 
 sed -i -e 's/$/,/; 1 iimg = [' -i -e '$a]' ${OUTPY}
 
 echo '[+]Removing TEMP...'
 rm $TMP
-
