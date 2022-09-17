@@ -15,25 +15,25 @@ cat << 'EOF'
 
 git|twitter: shubhamvis98
 web: https://fossfrog.in
--------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 EOF
 }
 
 help()
 {
-cat << 'EOF'
+cat << EOF
 USAGE:
-        ./g2bconv -i gif_file -o output_directory -s widthxheight -f frameskip
--------------------------------------------------------------------------------
+        `basename $0` -h # for help
+        `basename $0` -i gif_file -o output_directory -s widthxheight -f frameskip
+
         # width, height and frameskip values are optional
         # default values for width=128, height=64 with no frameskip
 
 EXAMPLE:
-        ./g2conv -h # for help
-        ./g2bconv -i cat.gif -o cat -s 64x32 -f 4
-        ./g2bconv -i cat.gif -o cat -s 64x32
-        ./g2bconv -i cat.gif -o cat
--------------------------------------------------------------------------------
+        `basename $0` -i cat.gif -o cat -s 64x32 -f 4
+        `basename $0` -i cat.gif -o cat -s 64x32
+        `basename $0` -i cat.gif -o cat -s 100 # same width and height
+        `basename $0` -i cat.gif -o cat
 
 EOF
 }
@@ -62,7 +62,7 @@ do
 done
 
 [[ -z $OUT ]] && banner && help && exit || banner
-[ ! -d $OUT ] && mkdir -p $2
+[ ! -d $OUT ] && mkdir -p $OUT
 if [[ -z $SIZE ]]
 then
 	WIDTH=128
