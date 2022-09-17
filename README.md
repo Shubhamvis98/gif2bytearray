@@ -5,21 +5,24 @@
  / _  | (_   __)  (____ |  _ \| |    \(____ (_   _) _ \ / ___)
 ( (_| | | | |     / ___ | | | | | | | / ___ | | || |_| | |
  \___ |_| |_|     \_____|_| |_|_|_|_|_\_____|  \__)___/|_|
-(_____|                             gif to bytesarray
+(_____|                                   gif to bytearray
 
 git|twitter: shubhamvis98
 web: https://fossfrog.in
---------------------------------------------------------------
-USAGE:
-        ./g2bconv gif_file output_directory width height frameskip
+-------------------------------------------------------------------------------
 
+USAGE:
+        ./g2bconv -i gif_file -o output_directory -s widthxheight -f frameskip
+-------------------------------------------------------------------------------
         # width, height and frameskip values are optional
         # default values for width=128, height=64 with no frameskip
 
 EXAMPLE:
-        ./g2bconv cat.gif cat 64 64
-        ./g2bconv cat.gif cat
---------------------------------------------------------------
+        ./g2conv -h # for help
+        ./g2bconv -i cat.gif -o cat -s 64x32 -f 4
+        ./g2bconv -i cat.gif -o cat -s 64x32
+        ./g2bconv -i cat.gif -o cat
+-------------------------------------------------------------------------------
 </pre>
 
 This tool creates a file names as per {output_directory}.py wich contains the list of bytearray.<br>So you can use the file by importing in micropython. eg. the output is "cat.py"
